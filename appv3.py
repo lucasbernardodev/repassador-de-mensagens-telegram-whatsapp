@@ -2,15 +2,15 @@ import telegram
 from selenium import webdriver
 import time
 
-bot = telegram.Bot(token='COLOQUE_SEU_TOKEN_AQUI')
+bot = telegram.Bot(token='SEU_TOKEN_TELEGRAM')
 
 # Declaração da variável para armazenar a mensagem encaminhada para o grupo do WhatsApp
 msgToWhats = ""
 
 def repassar_mensagem(update, context):
     message = update.message.text
-    bot.send_message(chat_id='ID_DO_GRUPO_Y', text=message)
-    bot.send_message(chat_id='ID_DO_GRUPO_Z', text=message)
+    bot.send_message(chat_id='ID_GRUPO_Y', text=message)
+    # bot.send_message(chat_id='ID_DO_GRUPO_Z', text=message)
 
     # Atribui a mensagem para a variável 'msgToWhats'
     global msgToWhats
@@ -19,10 +19,10 @@ def repassar_mensagem(update, context):
 # Configuração do bot do Telegram
 from telegram.ext import Updater, MessageHandler, filters
 
-updater = Updater(token='COLOQUE_SEU_TOKEN_AQUI', use_context=True)
+updater = Updater(token='SEU_TOKEN_TELEGRAM', use_context=True)
 dispatcher = updater.dispatcher
 
-dispatcher.add_handler(MessageHandler(Filters.chat(chat_id='ID_DO_GRUPO_X'), repassar_mensagem))
+dispatcher.add_handler(MessageHandler(filters.Chat(chat_id='ID_GRUPO_X'), repassar_mensagem))
 
 updater.start_polling()
 
@@ -33,7 +33,7 @@ updater.start_polling()
 # Loop para enviar a mensagem para o WhatsApp Web
 while True:
     # Abre o navegador e acessa a página do WhatsApp Web
-    driver = webdriver.Chrome('/caminho/para/o/driver/do/chrome')
+    driver = webdriver.Chrome('/webdriver/chromedriver')
     driver.get('https://web.whatsapp.com/')
 
     # Espera o usuário fazer o login no WhatsApp Web
